@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube Sidebar Filter
 // @namespace    
-// @version      0.2
+// @version      0.3
 // @description  Adds filter field to YouTube's sidebar for Subscriptions
 // @author       zhal9k
 // @match        http*://*.youtube.com/*
@@ -12,14 +12,47 @@
 (function() {
     "use strict";
 
-    var filterBar;
+    var filterBar = null;
     var elements = [ ];
-
     var subsList = document.getElementById("guide-channels");
 
     if (subsList !== null)
     {
         addFilterBar();
+    }
+    else
+    {
+        var guideButton = document.getElementById("appbar-guide-button");
+        guideButton.addEventListener("click", addFilterBarOnGuideClick, false);
+    }
+
+    function addFilterBarOnGuideClick()
+    {
+        var timerFunc;
+        if (filterBar === null)
+        {
+            timerFunc = setInterval(myTimer, 1000);
+        }
+
+        var count = 0;
+
+        function myTimer()
+        {
+            count++;
+            subsList = document.getElementById("guide-channels");
+            if (filterBar === null && subsList !== null)
+            {
+                addFilterBar();
+                if (filterBar !== null)
+                {
+                    clearInterval(timerFunc);
+                }
+            }
+            if (count > 5)
+            {
+                clearInterval(timerFunc);
+            }
+        }
     }
 
     function addFilterBar()
@@ -30,7 +63,7 @@
         filterBar.setAttribute("class", "search-term");
         filterBar.setAttribute("style", "height: 20px;");
         filterBar.setAttribute("placeholder", "Filter...");
-        filterBar.addEventListener("keyup", function() { filterElements(); }, false);
+        filterBar.addEventListener("keyup", filterElements, false);
         subsParent.insertBefore(filterBar, subsList);
 
         var subNames = subsList.getElementsByClassName("display-name");
@@ -56,9 +89,9 @@
             temp = elements[ii];
             if (temp.name.indexOf(filterBy) > -1)
             {
-                if (temp.element.style.display !== "")
+                if (temp.element.style.display !== "list-item")
                 {
-                    temp.element.style.display = "";
+                    temp.element.style.display = "list-item";
                 }
             }
             else
@@ -90,4 +123,3 @@
         return retval;
     }
 })();
-
