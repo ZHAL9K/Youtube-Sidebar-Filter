@@ -1,5 +1,5 @@
 # Youtube Sidebar Filter
-Makes the Subscriptions section of Youtube's sidebar useful when you are subscribed to Too Many™ channels.
+Allows you to filter your Subscriptions and Playlists in Youtube's sidebar.
 
 # Installation
-Copy the contents of Youtube Sidebar Filter.user.js to a new script in Greasemonkey or Tampermonkey, save, go to Youtube and filter away.
+You can install the script from [OpenUserJS](https://openuserjs.org/scripts/ZHAL9K/Youtube_Sidebar_Filter)
