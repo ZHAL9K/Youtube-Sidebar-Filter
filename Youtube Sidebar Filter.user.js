@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name         Youtube Sidebar Filter
-// @namespace    
+// @namespace    https://github.com/ZHAL9K/Youtube-Sidebar-Filter
+// @updateURL    https://openuserjs.org/meta/ZHAL9K/Youtube_Sidebar_Filter.meta.js
 // @version      1.0
 // @description  Adds filter bars to YouTube's sidebar for Subscriptions and Playlists
-// @author       zhal9k
+// @author       ZHAL9K
 // @match        http*://*.youtube.com/*
 // @exclude      *://www.youtube.com/tv*
 // @exclude      *://www.youtube.com/embed/*
