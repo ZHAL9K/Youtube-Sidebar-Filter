@@ -2,7 +2,7 @@
 // @name         Youtube Sidebar Filter
 // @homepageURL  https://github.com/ZHAL9K/Youtube-Sidebar-Filter
 // @updateURL    https://openuserjs.org/meta/ZHAL9K/Youtube_Sidebar_Filter.meta.js
-// @version      1.0
+// @version      1.1
 // @description  Adds filter bars to YouTube's sidebar for Subscriptions and Playlists
 // @author       ZHAL9K
 // @match        http*://*.youtube.com/*
@@ -10,7 +10,7 @@
 // @exclude      *://www.youtube.com/embed/*
 // @exclude      *://www.youtube.com/live_chat*
 // @grant        none
-// @run-at document-idle
+// @run-at       document-idle
 // ==/UserScript==
 
 (function() {
@@ -144,20 +144,20 @@
 
     function populateElements(elements, listUL)
     {
-        var names = listUL.getElementsByClassName("yt-valign-container");
-        for (var ii = 0; ii < names.length; ii++)
+        var items = listUL.getElementsByClassName("guide-item");
+        for (var ii = 0; ii < items.length; ii++)
         {
-            var el = getAncestorLI(names[ii]);
+            var el = getAncestorLI(items[ii]);
             if (el !== null)
             {
-                var name = names[ii].innerText.toUpperCase();
+                var name = items[ii].getAttribute("title").toUpperCase();
                 var subtitle = "";
-                var subtitles = names[ii].getElementsByClassName("guide-item-subtitle");
+                var subtitles = items[ii].getElementsByClassName("guide-item-subtitle");
                 if (subtitles.length > 0)
                 {
-                    subtitle = subtitles[0].innerText;
+                    subtitle = subtitles[0].innerText.toUpperCase();
                 }
-                elements.push({ name: name, subtitle: subtitle, element: getAncestorLI(names[ii]) });
+                elements.push({ name: name, subtitle: subtitle, element: el });
             }
         }
     }
@@ -180,7 +180,7 @@
         for (ii = 0; ii < elements.length; ii++)
         {
             temp = elements[ii];
-            if (temp.name.indexOf(filterBy) > -1 || temp.subtitle.indexOf(filterBy) > -1)
+            if (temp.name.indexOf(filterBy) > -1 || (temp.subtitle.length > 0 && temp.subtitle.indexOf(filterBy) > -1))
             {
                 if (temp.element.style.display !== "list-item")
                 {
