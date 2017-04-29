@@ -5,7 +5,8 @@
 // @version      1.1
 // @description  Adds filter bars to YouTube's sidebar for Subscriptions and Playlists
 // @author       ZHAL9K
-// @match        http*://*.youtube.com/*
+// @match        http://*.youtube.com/*
+// @match        https://*.youtube.com/*
 // @exclude      *://www.youtube.com/tv*
 // @exclude      *://www.youtube.com/embed/*
 // @exclude      *://www.youtube.com/live_chat*
